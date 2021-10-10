@@ -9,5 +9,5 @@ ENV REACT_APP_API_PORT $REACT_APP_API_PORT
 ARG REACT_APP_API_IP
 ENV REACT_APP_API_IP $REACT_APP_API_IP
 
-RUN npm run build
-CMD ["npm", "start"]
+RUN npm i
+CMD ["npm", "run", "start"]
