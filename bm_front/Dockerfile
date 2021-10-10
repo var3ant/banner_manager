@@ -1,0 +1,13 @@
+FROM node:15.13-alpine
+WORKDIR .
+ENV PATH="./node_modules/.bin:$PATH"
+COPY . .
+
+ARG REACT_APP_API_PORT
+ENV REACT_APP_API_PORT $REACT_APP_API_PORT
+
+ARG REACT_APP_API_IP
+ENV REACT_APP_API_IP $REACT_APP_API_IP
+
+RUN npm run build
+CMD ["npm", "start"]

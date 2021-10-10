@@ -1,0 +1,70 @@
+version: '3.7'
+
+services:
+  mysql_db_container:
+    image: mysql:8.0.3
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_TCP_PORT: ${MYSQL_TCP_PORT}
+    volumes:
+      - "mysql_db_data:/var/lib/mysql_banner_manager"
+    ports:
+      - ${MYSQL_TCP_PORT}:${MYSQL_TCP_PORT}
+    expose:
+        - ${MYSQL_TCP_PORT}
+    networks:
+      - backend
+
+  backend_container:
+    build:
+      context: ./banner_manager
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      DB_IP: "mysql_db_container"
+      DB_PORT: ${MYSQL_TCP_PORT}
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASS: ${MYSQL_PASSWORD}
+      SPRING_PORT: ${SPRING_PORT}
+      MESSAGE_PING: "from docker"
+    volumes:
+      - "./tm-backend/build/libs:/usr/local/tomcat/webapps/"
+    expose:
+      - ${SPRING_PORT}
+    ports:
+      - ${SPRING_PORT}:${SPRING_PORT}
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - mysql_db_container
+
+  frontend_container:
+    build:
+      context: ./bm_front
+      dockerfile: Dockerfile
+    volumes:
+      - "./tm-frontend/build/:/usr/local/tomcat/webapps/"
+    restart: always
+    environment:
+      PORT: ${REACT_PORT}
+      REACT_APP_API_PORT: ${REACT_APP_API_PORT}
+      REACT_APP_API_IP: ${REACT_APP_API_IP}
+    ports:
+      - ${REACT_PORT}:${REACT_PORT}
+    depends_on:
+      - backend_container
+    networks:
+      - frontend
+volumes:
+  mysql_db_data:
+
+networks:
+  backend:
+  frontend:

@@ -1,0 +1,7 @@
+http://localhost:8090/bid?category=cat1
+User-Agent: user_1
+###
+
+http://localhost:8090/bid?category=cat1
+User-Agent: user_2
+###

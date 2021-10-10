@@ -1,0 +1,36 @@
+### JetBrains ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+### Spring Boot ###
+/banner_manager/target/
+!/banner_manager/.mvn/wrapper/maven-wrapper.jar
+!/banner_manager/**/src/main/**/target/
+!/banner_manager/**/src/test/**/target/
+
+
+### React ###
+# dependencies
+/bm_front/node_modules
+/bm_front/.pnp
+.pnp.js
+
+# testing
+/bm_front/coverage
+
+# production
+/bm_front/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
