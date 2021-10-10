@@ -34,7 +34,7 @@ services:
       SPRING_PORT: ${SPRING_PORT}
       MESSAGE_PING: "from docker"
     volumes:
-      - "./tm-backend/build/libs:/usr/local/tomcat/webapps/"
+      - "./bm-backend/build/libs:/usr/local/tomcat/webapps/"
     expose:
       - ${SPRING_PORT}
     ports:
@@ -50,7 +50,7 @@ services:
       context: ./bm_front
       dockerfile: Dockerfile
     volumes:
-      - "./tm-frontend/build/:/usr/local/tomcat/webapps/"
+      - "./bm-frontend/build/:/usr/local/tomcat/webapps/"
     restart: always
     environment:
       PORT: ${REACT_PORT}
