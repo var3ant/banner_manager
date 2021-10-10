@@ -24,16 +24,16 @@ The service can be launched in two ways:
 ### The second way, separately:
 + ##### 0. Install MySQL, JDK 8, Node.js and Maven
 + ##### 1. Create MySQL database and user (see example in `/banner_manager/create.sql`), then setup relevant parameters in
- + /banner_manager/src/main/resourcesapplication.properties:
-   + `DB_USERNAME` – database user name. Default `user1`
-   + `DB_PASS` – user password. Default `user1pass`
-   + `DB_PORT` - port for mysql deployment. Default `3306`
-   + `DB_NAME` – database name. Default `banner_manager`
-   + `SPRING_PORT` - spring boot server port. Default `8090`
+  + /banner_manager/src/main/resourcesapplication.properties:
+    + `DB_USERNAME` – database user name. Default `user1`
+    + `DB_PASS` – user password. Default `user1pass`
+    + `DB_PORT` - port for mysql deployment. Default `3306`
+    + `DB_NAME` – database name. Default `banner_manager`
+    + `SPRING_PORT` - spring boot server port. Default `8090`
 
- + /bm_front/.env:
-   + `REACT_APP_API_PORT` - port, to which the frontend will be sending requests (probably similar to SPRING_PORT). Default `8090`
-   + `REACT_APP_API_IP` - IP, to which the frontend will be addressing. Default `"http://localhost"`
+  + /bm_front/.env:
+    + `REACT_APP_API_PORT` - port, to which the frontend will be sending requests (probably similar to SPRING_PORT). Default `8090`
+    + `REACT_APP_API_IP` - IP, to which the frontend will be addressing. Default `"http://localhost"`
 
 + ##### 2. In folder /banner_manager execute `mvn spring-boot:run`
 + ##### 3. In folder /bm_front execute
